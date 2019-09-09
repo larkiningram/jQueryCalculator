@@ -78,54 +78,77 @@
   <script type="text/javascript">
 
 
-    var firstNumber = [];
-    var secondNumber = [];
-    var operator = [];
-    var result = 0;
+    var firstNumber = "";
+    var secondNumber = "";
+    var operator = "";
+    var result;
 
     $(document).ready(function () {
 
       // Your code here...
 
       $(".number").on("click", function () {
-        console.log($(this).val());
-        $("#first-number").append($(this).val());
+        // console.log($(this).val());
+
+        console.log(firstNumber);
+        if (operator == "") {
+          firstNumber = firstNumber + $(this).val();
+          $("#first-number").append($(this).val());
+        }
+        else if (operator !== "") {
+          secondNumber = secondNumber + $(this).val();
+          $("#second-number").append($(this).val());
+        }
+        
       })
 
       $(".operator").on("click", function () {
         console.log($(this).val());
         $("#operator").text($(this).val());
-        
-        if ($(this).val() === "plus") {
-          result = firstNumber + secondNumber;
-        }
-        else if ($(this).val() === "minus") {
-          result = firstNumber - secondNumber;
-        }
-        else if ($(this).val() === "times") {
-          result = firstNumber * secondNumber;
-        }
-        else if ($(this).val() === "divide") {
-          result = firstNumber / secondNumber;
-        }
-        else if ($(this).val() === "power") {
-          result = firstNumber ** secondNumber;
-        }
-
+        operator = $(this).val();
       })
 
-      $(".number").on("click", function () {
-        console.log($(this).val());
-        $("#second-number").append($(this).val());
-      })
+      // $(".number").on("click", function () {
+      //   secondNumber = secondNumber + $(this).val();
+      //   // console.log($(this).val());
+      //   console.log(secondNumber);
+
+      //   $("#second-number").append($(this).val());
+                
+      // })
 
       $(".equal").on("click", function () {
         console.log($(this).val());
+
+        if (operator === "plus") {
+          result = parseInt(firstNumber) + parseInt(secondNumber);
+        }
+        else if (operator === "minus") {
+          result = parseInt(firstNumber) - parseInt(secondNumber);
+        }
+        else if (operator === "times") {
+          result = parseInt(firstNumber) * parseInt(secondNumber);
+        }
+        else if (operator === "divide") {
+          result = parseInt(firstNumber) / parseInt(secondNumber);
+        }
+        else if (operator === "power") {
+          result = parseInt(firstNumber) ** parseInt(secondNumber);
+        }
+        console.log(result);
         $("#result").text(result);
+
       })
+
+
+      }
 
       $(".clear").on("click", function () {
         console.log($(this).val());
+        firstNumber = "";
+        secondNumber = "";
+        operator;
+        result;
         $("#first-number").empty();
         $("#second-number").empty();
         $("#operator").empty();
